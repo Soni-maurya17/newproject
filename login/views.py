@@ -10,8 +10,8 @@ def register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('pwd')
-        cpassword = request.POST.get('cpwd')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
         if password == cpassword:
             user= User(username=username, email=email)
             user.set_password(password)
@@ -25,7 +25,8 @@ def login_view(request):
         user =authenticate(username=username,password=password)
         if user:
             login(request,user)
-        return redirect('homepage')
+            return redirect('homepage')
+        print("welcome",username)
     return render(request,'login.html')
 
 def logout_view(request):
